@@ -10,7 +10,8 @@ If WinExist("ahk_exe Scapple.exe")
 	WinActivate, ahk_exe Scapple.exe
 	Sleep, 150
 	Send ^{Enter}
-	KeyWait, Enter
+	KeyWait, Control, L
+	KeyWait, Enter, L
 	Send ^v
 }
 else
@@ -19,7 +20,8 @@ else
 	WinActivate
 	Sleep, 200
 	Send ^{Enter}
-	KeyWait, Enter
+	KeyWait, Control, L
+	KeyWait, Enter, L
 	Send ^v
 }
 Return
