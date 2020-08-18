@@ -8,7 +8,7 @@ Send, ^c
 If WinExist("ahk_exe Scapple.exe")
 {
 	WinActivate, ahk_exe Scapple.exe
-	Sleep, 150
+	Sleep, 300
 	Send ^{Enter}
 	KeyWait, Control, L
 	KeyWait, Enter, L
@@ -18,7 +18,7 @@ else
 {
 	Run, D:\program file\scapple.exe
 	WinActivate
-	Sleep, 200
+	Sleep, 500
 	Send ^{Enter}
 	KeyWait, Control, L
 	KeyWait, Enter, L
