@@ -3,48 +3,6 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-/*
-^`::
-{
-Send, ^c
-Sleep 50
-Run, http://www.google.com/search?q=%clipboard%
-Return
-}
-*/
-^q::
-{
-Send, ^c
-Sleep 50
-Run, https://youglish.com/pronounce/%clipboard%/english?/us
-Run, https://www.google.com/search?q=%clipboard%&tbm=isch&ved=2ahUKE
-Return
-}
-
-;***coppy a clipboard into SCAPPLE***
-F1:: 
-Send, ^c
-If WinExist("ahk_exe Scapple.exe")
-{
-	WinActivate, ahk_exe Scapple.exe
-	Sleep, 300
-	Send ^{Enter}
-	KeyWait, Control, L
-	KeyWait, Enter, L
-	Send ^v
-}
-else
-{
-	Run, D:\program file\scapple.exe
-	WinActivate
-	Sleep, 500
-	Send ^{Enter}
-	KeyWait, Control, L
-	KeyWait, Enter, L
-	Send ^v
-}
-Return
-
 
 ;***splitting a text into multiple setences SCAPPLE***
 ^Tab::
