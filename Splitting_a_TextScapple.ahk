@@ -12,18 +12,6 @@ ClipWait
 
 StringReplace, Clipboard , Clipboard , `r`n, %A_Space%, All
 separate := RegExReplace(Clipboard,"((?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s)","@@@`n")
-
-/*WrapText(Clipboard,StrLen(Clipboard))
-
-WrapText(Text, LineLength) {
-	StringReplace, Text, Text, `r`n, %A_Space%, All
-	while (p := RegExMatch(Text, "(.{1," LineLength "})(\s|\R+|$)", Match, p ? p + StrLen(Match) : 1))
-		Result .= Match1 ((Match2 = A_Space || Match2 = A_Tab) ? "`n" : Match2)
-	return, Result
-}
-NewStr := StrReplace(WrapText(Clipboard, StrLen(Clipboard)), ".", ".. ")
-clipboardArray := StrSplit(NewStr,". ")
-*/
 clipboardArray := StrSplit(separate, "@@@`n")
 
 Loop % clipboardArray.MaxIndex()
