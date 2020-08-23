@@ -10,7 +10,10 @@ Clipboard := ""
 Send ^c
 ClipWait
 
-WrapText(Clipboard,StrLen(Clipboard))
+StringReplace, Clipboard , Clipboard , `r`n, %A_Space%, All
+separate := RegExReplace(Clipboard,"((?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s)","@@@`n")
+
+/*WrapText(Clipboard,StrLen(Clipboard))
 
 WrapText(Text, LineLength) {
 	StringReplace, Text, Text, `r`n, %A_Space%, All
@@ -20,6 +23,8 @@ WrapText(Text, LineLength) {
 }
 NewStr := StrReplace(WrapText(Clipboard, StrLen(Clipboard)), ".", ".. ")
 clipboardArray := StrSplit(NewStr,". ")
+*/
+clipboardArray := StrSplit(separate, "@@@`n")
 
 Loop % clipboardArray.MaxIndex()
 {
