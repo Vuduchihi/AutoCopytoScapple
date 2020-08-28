@@ -13,7 +13,7 @@ If WinExist("ahk_exe Scapple.exe")
 	Send ^{Enter}
 	Keywait Control
 	Keywait Enter
-	sleep 80
+	sleep 200
 	Send ^v
 }
 else
@@ -24,7 +24,7 @@ else
 	Send ^{Enter}
 	Keywait Control
 	Keywait Enter
-	sleep 80
+	sleep 200
 	Send ^v
 }
 Return
