@@ -2,8 +2,8 @@
 
 ;***Pronuciation Scapple to GoldenDict***
 
-;Reading one word
-^CapsLock:: /*press Ctrl+CapsLock*/
+;***Reading one word
+^CapsLock:: ;press Ctrl+CapsLock
 Send {Click, 4}
 sleep 100
 Send, ^c
@@ -26,8 +26,8 @@ else
 }
 return
 
-;reading whole sentence
-^+CapsLock:: /*press Ctrl+Shift+CapsLock*/
+;***reading the text what is selected
+^+CapsLock:: ;press Ctrl+Shift+CapsLock
 Send, ^c
 If WinExist("ahk_exe GoldenDict.exe")
 {
