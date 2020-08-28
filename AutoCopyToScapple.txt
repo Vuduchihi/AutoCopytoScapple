@@ -4,7 +4,7 @@ SendMode Input  ; Recommended for new scripts due to its superior speed and reli
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ;***coppy a clipboard into SCAPPLE***
-F1:: 
+F1:: /*press F1*/
 Send, ^c
 If WinExist("ahk_exe Scapple.exe")
 {
