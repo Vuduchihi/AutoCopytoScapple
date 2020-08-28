@@ -1,0 +1,11 @@
+;***Copy + Run web***
+^Tab:: /*press Ctrl+Tab*/
+{
+Send, ^c
+Sleep 50
+Run, https://youglish.com/pronounce/%clipboard%/english?/us
+Run, https://www.google.com/search?q=%clipboard%&tbm=isch&ved=2ahUKE
+Run, https://www.oxfordlearnersdictionaries.com/definition/english/%clipboard%?q=%clipboard%
+Run, https://sentence.yourdictionary.com/%clipboard%
+Return
+}
