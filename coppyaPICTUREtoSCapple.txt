@@ -1,0 +1,22 @@
+;***screenshort a PICTURE to SCapple***
+^+s::
+Send #+s
+KeyWait, LButton, D
+KeyWait, LButton
+sleep 800
+If WinExist("ahk_exe Scapple.exe")
+{
+	WinActivate, ahk_exe Scapple.exe
+	WinWaitActive, ahk_exe Scapple.exe
+	Send ^d
+	KeyWait, d, L
+	SendInput ^v
+}	
+else
+{
+	Run, D:\program file\scapple.exe
+	WinActivate, ahk_exe Scapple.exe
+	WinWaitActive, ahk_exe Scapple.exe
+	SendInput ^v
+}
+return
