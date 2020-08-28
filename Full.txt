@@ -1,0 +1,172 @@
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+; #Warn  ; Enable warnings to assist with detecting common errors.
+SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
+SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+
+;***Pronuciation Scapple to GoldenDict***
+^CapsLock:: ;press Ctrl+CapsLock;
+Send {Click, 4}
+sleep 100
+Send, ^c
+If WinExist("ahk_exe GoldenDict.exe")
+{
+	WinActivate, ahk_exe GoldenDict.exe
+	WinWaitActive, ahk_exe GoldenDict.exe
+	SendInput ^v
+	KeyWait, v, L
+
+}	
+else
+{
+	Run, D:\Downloads\GoldenDict\GoldenDict.exe
+	WinWaitActive, ahk_exe GoldenDict.exe
+	WinActivate, ahk_exe GoldenDict.exe
+	SendInput ^v
+	KeyWait, v, L
+	Send {Enter}
+}
+return
+
+;Reading the test what is selected
+^!CapsLock:: ;press Ctrl+Alt+CapsLock
+Send, ^c
+If WinExist("ahk_exe GoldenDict.exe")
+{
+	WinActivate, ahk_exe GoldenDict.exe
+	WinWaitActive, ahk_exe GoldenDict.exe
+	SendInput ^v
+	KeyWait, v, L
+
+}	
+else
+{
+	Run, D:\Downloads\GoldenDict\GoldenDict.exe
+	WinWaitActive, ahk_exe GoldenDict.exe
+	WinActivate, ahk_exe GoldenDict.exe
+	SendInput ^v
+	KeyWait, v, L
+	Send {Enter}
+}
+return
+
+;***run link file scapple***
+^!`:: ;press Ctrl+Alt+`
+{
+Clipboard := ""
+Send ^c
+ClipWait
+Sleep 50
+Run, %Clipboard%
+Return
+}
+
+;***Copy + Run web***
+^Tab:: ;press Ctrl+Tab
+{
+Send, ^c
+Sleep 50
+Run, https://youglish.com/pronounce/%clipboard%/english?/us
+Run, https://www.google.com/search?q=%clipboard%&tbm=isch&ved=2ahUKE
+Run, https://www.oxfordlearnersdictionaries.com/definition/english/%clipboard%?q=%clipboard%
+Run, https://sentence.yourdictionary.com/%clipboard%
+Return
+}
+
+;***coppy a clipboard into SCAPPLE***
+F1:: ;press F1
+Send, ^c
+Sleep 50
+If WinExist("ahk_exe Scapple.exe")
+{
+	WinActivate, ahk_exe Scapple.exe
+	WinWaitActive, ahk_exe Scapple.exe
+	Send ^{Enter}
+	Keywait Control
+	Keywait Enter
+	sleep 200
+	Send ^v
+}
+else
+{
+	Run, D:\program file\scapple.exe
+	WinActivate, ahk_exe Scapple.exe
+	WinWaitActive, ahk_exe Scapple.exe
+	Send ^{Enter}
+	Keywait Control
+	Keywait Enter
+	sleep 200
+	Send ^v
+}
+Return
+
+
+;***splitting a text into multiple setences SCAPPLE***
+^!Tab:: ;press Ctrl+Alt+Tab
+Clipboard := ""
+Send ^c
+ClipWait
+
+StringReplace, Clipboard , Clipboard , `r`n, %A_Space%, All
+separate := RegExReplace(Clipboard,"((?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s)","@@@`n")
+
+/*WrapText(Clipboard,StrLen(Clipboard))
+WrapText(Text, LineLength) {
+	StringReplace, Text, Text, `r`n, %A_Space%, All
+	while (p := RegExMatch(Text, "(.{1," LineLength "})(\s|\R+|$)", Match, p ? p + StrLen(Match) : 1))
+		Result .= Match1 ((Match2 = A_Space || Match2 = A_Tab) ? "`n" : Match2)
+	return, Result
+}
+NewStr := StrReplace(WrapText(Clipboard, StrLen(Clipboard)), ".", ".. ")
+clipboardArray := StrSplit(NewStr,". ")
+*/
+clipboardArray := StrSplit(separate, "@@@`n")
+
+Loop % clipboardArray.MaxIndex()
+{
+	sentences := clipboardArray[A_Index]
+	If WinExist("ahk_exe Scapple.exe")
+	{
+		WinActivate, ahk_exe Scapple.exe
+		WinWaitActive, ahk_exe Scapple.exe
+		Send ^{Enter}
+		KeyWait, Control, L
+		KeyWait, Enter, L
+		SendInput %sentences%{^v}
+		KeyWait, v, L	
+	}
+	else
+	{
+		Run, D:\program file\scapple.exe
+		WinActivate
+		WinWaitActive, ahk_exe Scapple.exe
+		Send ^{Enter}
+		KeyWait, Control, L
+		KeyWait, Enter, L
+		SendInput %sentences%{^v}
+		KeyWait, v, L		
+	}
+}
+return
+
+;***screenshort a PICTURE to SCapple***
+^!s:: ;press Ctrl+Alt+s
+Send #+s
+KeyWait, LButton, D
+KeyWait, LButton
+sleep 1000
+If WinExist("ahk_exe Scapple.exe")
+{
+	WinActivate, ahk_exe Scapple.exe
+	WinWaitActive, ahk_exe Scapple.exe
+	Send ^d
+	KeyWait, d, L
+	SendInput ^v
+}	
+else
+{
+	Run, D:\program file\scapple.exe
+	WinActivate, ahk_exe Scapple.exe
+	WinWaitActive, ahk_exe Scapple.exe
+	SendInput ^v
+}
+return
