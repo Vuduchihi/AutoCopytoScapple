@@ -1,5 +1,5 @@
 ;***Copy + Run web***
-^Tab:: /*press Ctrl+Tab*/
+^Tab:: ;press Ctrl+Tab
 {
 Send, ^c
 Sleep 50
