@@ -1,0 +1,25 @@
+;***Pronuciation Scapple to GoldenDict***
+^`::
+Send {Click, 4}
+Send ^c
+Keywait, ^
+Keywait, c
+If WinExist("ahk_exe GoldenDict.exe")
+{
+	WinActivate, ahk_exe GoldenDict.exe
+	WinWaitActive, ahk_exe GoldenDict.exe
+	SendInput ^v
+	KeyWait v, L
+	Send {Enter}
+}	
+else
+{
+	Run, D:\Downloads\GoldenDict\GoldenDict.exe
+	WinWaitActive, ahk_exe GoldenDict.exe
+	WinActivate, ahk_exe GoldenDict.exe
+	
+	SendInput ^v
+	KeyWait v, L
+	Send {Enter}
+}
+return
