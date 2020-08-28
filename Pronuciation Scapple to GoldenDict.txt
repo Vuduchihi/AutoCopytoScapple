@@ -1,16 +1,15 @@
 ;***Pronuciation Scapple to GoldenDict***
-^`::
+^CapsLock::
 Send {Click, 4}
-Send ^c
-Keywait, ^
-Keywait, c
+sleep 100
+Send, ^c
 If WinExist("ahk_exe GoldenDict.exe")
 {
 	WinActivate, ahk_exe GoldenDict.exe
 	WinWaitActive, ahk_exe GoldenDict.exe
 	SendInput ^v
-	KeyWait v, L
-	Send {Enter}
+	KeyWait, v, L
+
 }	
 else
 {
@@ -19,7 +18,6 @@ else
 	WinActivate, ahk_exe GoldenDict.exe
 	
 	SendInput ^v
-	KeyWait v, L
-	Send {Enter}
+	KeyWait, v, L
 }
 return
