@@ -1,4 +1,4 @@
-;***Copy + Run web***
+;***SearchWordOnWeb***
 ^Tab:: ;press Ctrl+Tab
 {
 Send, ^c
