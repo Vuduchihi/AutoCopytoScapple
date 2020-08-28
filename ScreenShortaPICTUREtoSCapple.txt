@@ -3,7 +3,7 @@
 Send #+s
 KeyWait, LButton, D
 KeyWait, LButton
-sleep 800
+sleep 1000
 If WinExist("ahk_exe Scapple.exe")
 {
 	WinActivate, ahk_exe Scapple.exe
