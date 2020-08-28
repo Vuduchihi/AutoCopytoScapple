@@ -1,5 +1,9 @@
+;NOTE: sau khi goldendict hien ma khong hien images => Press Ctrl+S
+
 ;***Pronuciation Scapple to GoldenDict***
-^CapsLock::
+
+;Reading one word
+^CapsLock:: /*press Ctrl+CapsLock*/
 Send {Click, 4}
 sleep 100
 Send, ^c
@@ -16,8 +20,30 @@ else
 	Run, D:\Downloads\GoldenDict\GoldenDict.exe
 	WinWaitActive, ahk_exe GoldenDict.exe
 	WinActivate, ahk_exe GoldenDict.exe
-	
 	SendInput ^v
 	KeyWait, v, L
+	Send {Enter}
+}
+return
+
+;reading whole sentence
+^+CapsLock:: /*press Ctrl+Shift+CapsLock*/
+Send, ^c
+If WinExist("ahk_exe GoldenDict.exe")
+{
+	WinActivate, ahk_exe GoldenDict.exe
+	WinWaitActive, ahk_exe GoldenDict.exe
+	SendInput ^v
+	KeyWait, v, L
+
+}	
+else
+{
+	Run, D:\Downloads\GoldenDict\GoldenDict.exe
+	WinWaitActive, ahk_exe GoldenDict.exe
+	WinActivate, ahk_exe GoldenDict.exe
+	SendInput ^v
+	KeyWait, v, L
+	Send {Enter}
 }
 return
