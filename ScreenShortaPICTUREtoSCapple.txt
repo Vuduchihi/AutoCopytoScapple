@@ -1,5 +1,5 @@
 ;***screenshort a PICTURE to SCapple***
-^+s:: /*press Ctrl+Shift+s*/
+^!s:: /*press Ctrl+Alt+s*/
 Send #+s
 KeyWait, LButton, D
 KeyWait, LButton
