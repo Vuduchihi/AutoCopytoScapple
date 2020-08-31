@@ -5,7 +5,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 
 ;***splitting a text into multiple setences SCAPPLE***
-^+Tab:: ;press Ctrl+Shift+Tab
+^!Tab:: ;press Ctrl+Atl+Tab
 Clipboard := ""
 Send ^c
 ClipWait
