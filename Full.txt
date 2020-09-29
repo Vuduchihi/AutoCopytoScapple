@@ -62,15 +62,40 @@ Return
 
 ;***Copy + Run web***
 ^Tab:: ;press Ctrl+Tab
-{
+Clipboard := ""
 Send, ^c
-Sleep 50
-Run, https://youglish.com/pronounce/%clipboard%/english?/us
-Run, https://www.google.com/search?q=%clipboard%&tbm=isch&ved=2ahUKE
-Run, https://www.oxfordlearnersdictionaries.com/definition/english/%clipboard%?q=%clipboard%
-Run, https://sentence.yourdictionary.com/%clipboard%
-Return
+If WinExist("ahk_exe msedge.exe")
+{	
+	WinActivate, ahk_exe msedge.exe
+	WinWaitActive, ahk_exe msedge.exe
+	Sleep 1000
+	Send ^9
+	KeyWait, 9, L
+	Loop 3
+	{
+	Send ^w 
+	Sleep 400
+	KeyWait, w, L
+	}
+	Run, https://youglish.com/pronounce/%clipboard%/english?/us
+	Sleep 100
+	Send, ^+{TAB}
+	Sleep 100
+	Send ^w
+	Sleep 100
+	Run, https://www.google.com/search?q=%clipboard%&tbm=isch&ved=2ahUKE
+	Run, https://sentence.yourdictionary.com/%clipboard%
+	Run, https://www.oxfordlearnersdictionaries.com/definition/english/%clipboard%?q=%clipboard%
+	
 }
+else{
+	Run, https://youglish.com/pronounce/%clipboard%/english?/us	
+	Run, https://www.google.com/search?q=%clipboard%&tbm=isch&ved=2ahUKE
+	Run, https://www.oxfordlearnersdictionaries.com/definition/english/%clipboard%?q=%clipboard%
+	Run, https://sentence.yourdictionary.com/%clipboard%
+
+}
+return
 
 ;***coppy a clipboard into SCAPPLE***
 F1:: ;press F1
