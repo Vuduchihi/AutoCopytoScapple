@@ -3,6 +3,8 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
+#SingleInstance, Force
+
 ;***Pronuciation Scapple to GoldenDict***
 ^CapsLock:: ;press Ctrl+CapsLock;
 Send {Click, 4}
@@ -127,50 +129,42 @@ Return
 
 ;***splitting a text into multiple setences SCAPPLE***
 ^!Tab:: ;press Ctrl+Alt+Tab
-Clipboard := ""
-Send ^c
-ClipWait
+Clipback := ClipboardAll
+Clipboard =
+send, ^c
+ClipWait,1
 
+
+if ErrorLevel{
+		Clipboard:=Clipback
+		MsgBox, No text was sent to clipboard
+		return
+	}
 StringReplace, Clipboard , Clipboard , `r`n, %A_Space%, All
 separate := RegExReplace(Clipboard,"((?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s)","@@@`n")
 
-/*WrapText(Clipboard,StrLen(Clipboard))
-WrapText(Text, LineLength) {
-	StringReplace, Text, Text, `r`n, %A_Space%, All
-	while (p := RegExMatch(Text, "(.{1," LineLength "})(\s|\R+|$)", Match, p ? p + StrLen(Match) : 1))
-		Result .= Match1 ((Match2 = A_Space || Match2 = A_Tab) ? "`n" : Match2)
-	return, Result
-}
-NewStr := StrReplace(WrapText(Clipboard, StrLen(Clipboard)), ".", ".. ")
-clipboardArray := StrSplit(NewStr,". ")
-*/
-clipboardArray := StrSplit(separate, "@@@`n")
-
-Loop % clipboardArray.MaxIndex()
+If WinExist("ahk_exe Scapple.exe")
 {
-	sentences := clipboardArray[A_Index]
-	If WinExist("ahk_exe Scapple.exe")
-	{
-		WinActivate, ahk_exe Scapple.exe
-		WinWaitActive, ahk_exe Scapple.exe
-		Send ^{Enter}
-		KeyWait, Control, L
-		KeyWait, Enter, L
-		SendInput %sentences%{^v}
-		KeyWait, v, L	
-	}
-	else
-	{
-		Run, D:\program file\scapple.exe
-		WinActivate
-		WinWaitActive, ahk_exe Scapple.exe
-		Send ^{Enter}
-		KeyWait, Control, L
-		KeyWait, Enter, L
-		SendInput %sentences%{^v}
-		KeyWait, v, L		
-	}
+	WinActivate, ahk_exe Scapple.exe
+	WinWaitActive, ahk_exe Scapple.exe
 }
+else
+{
+	Run, D:\program file\scapple.exe
+	WinActivate
+	WinWaitActive, ahk_exe Scapple.exe		
+}
+
+for i, row in StrSplit(separate,"@@@`n"){
+	data.= row 
+	Clipboard:=data
+	Send ^{Enter}
+	send, ^v
+	Sleep, 150
+	Clipboard := Clipback
+	data:=""
+}
+
 return
 
 ;***screenshort a PICTURE to SCapple***
