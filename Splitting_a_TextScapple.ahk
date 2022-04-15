@@ -12,6 +12,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 Clipback := ClipboardAll
 Clipboard =
 send, ^c
+Sleep, 200
 ClipWait,1
 
 
